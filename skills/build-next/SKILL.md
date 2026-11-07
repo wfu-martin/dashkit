@@ -42,8 +42,8 @@ so any fresh session can pick the work up.
 
 ## Stop rule
 
-When the status line shows context past about 50% before the task is done,
-or the student says so: post a handoff comment on the Issue (what is done,
+When context passes about 50% before the task is done (the student's status
+line, or `/context`), or the student says so: post a handoff comment on the Issue (what is done,
 what is left, the next step number), commit the work in progress on the
 branch, push, and stop. The next fresh session resumes from that comment.
 
