@@ -39,5 +39,5 @@ They are built to run in a repository made from
 
 | File | What it is |
 |---|---|
-| `extras/global-CLAUDE.md` | A starter for `~/.claude/CLAUDE.md`: plain business language, one question at a time, token habits |
+| `extras/CLAUDE.md` | A starter for `~/.claude/CLAUDE.md`: plain business language, one question at a time, token habits |
 | `extras/statusline.py` | A status line showing the model, context used, and the five-hour plan limit |
