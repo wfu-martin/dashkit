@@ -1,0 +1,14 @@
+{
+  "name": "dashkit",
+  "owner": { "name": "R. Justin Martin" },
+  "metadata": {
+    "description": "Skills for building a tested, deployed Streamlit dashboard from a stakeholder brief."
+  },
+  "plugins": [
+    {
+      "name": "dashkit",
+      "source": "./",
+      "description": "Spec, roadmap, tests first, one task at a time, and a dashboard review."
+    }
+  ]
+}
