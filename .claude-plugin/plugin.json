@@ -1,6 +1,5 @@
 {
   "name": "dashkit",
-  "version": "0.1.0",
   "description": "Spec, roadmap, tests first, one task at a time, and a dashboard review.",
   "author": { "name": "R. Justin Martin" }
 }
