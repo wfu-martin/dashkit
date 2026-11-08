@@ -28,13 +28,18 @@ so any fresh session can pick the work up.
 7. **Commit, push, open a pull request** whose body says `Closes #<number>`
    and lists what changed on screen.
 8. **Review.** Launch a separate review agent with fresh context, model
-   `sonnet`. Give it the pull request number, the Issue number, and
-   `spec.md`, and ask it to check the diff against the spec and the
-   Issue's acceptance criteria: wrong numbers, metric definitions not
-   followed, missing tests, SQL that is slow or repeats rows, secrets, and
-   any box that lets a viewer type SQL. It reports findings, most important
-   first.
-9. **Fix** what the review found; re-run the full suite; push.
+   `sonnet`. Give it the pull request number, the Issue number, `spec.md`,
+   and `design.md`, and ask it to check the diff against the spec, the
+   Issue's acceptance criteria, and the drawing and style rules in
+   `design.md`: wrong numbers, metric definitions not followed, missing
+   tests, SQL that is slow or repeats rows, a screen that departs from its
+   drawing or breaks a style rule (quote the rule), secrets, and any box
+   that lets a viewer type SQL. It posts its findings as one comment on the
+   pull request (`gh pr comment`), most important first, each naming the
+   file and the change to make, and returns the same list.
+9. **Fix** what the review found; re-run the full suite; push. Then reply on
+   the pull request with one line per finding: fixed (name the commit), or
+   why it stands.
 10. **Merge** (`gh pr merge --squash --delete-branch`), switch to `main`,
     pull, and post a short handoff comment on the Issue: what changed, what
     to look at on screen, anything the next tasks should know.
