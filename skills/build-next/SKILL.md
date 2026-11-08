@@ -21,7 +21,8 @@ so any fresh session can pick the work up.
    Issue assigned to the student whose dependencies are closed
    (`gh issue list --assignee @me`). Confirm it with the student.
 3. **Branch** `<number>-<short-name>`.
-4. **Read only what the Issue names**: its spec sections and its files.
+4. **Read only what the Issue names**: its spec sections, its `design.md`
+   section, and its files.
 5. **Tests first.** Write the Issue's tests, run them, and confirm they fail.
 6. **Build** until they pass, then run the **full** suite. Nothing merges red.
 7. **Commit, push, open a pull request** whose body says `Closes #<number>`

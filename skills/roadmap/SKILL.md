@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Plan the build
 
-Read `spec.md` and `ROADMAP.md`. Turn the spec into phases and tasks the team
+Read `spec.md`, `design.md`, and `ROADMAP.md`. Turn the spec into phases and tasks the team
 can build one at a time, then create the tasks as GitHub Issues.
 
 If `/usage` leaves room, suggest `/model opus`; otherwise Sonnet with
@@ -21,10 +21,11 @@ before it:
    Streamlit Community Cloud (deploy a hello-world early).
 2. **Data layer**: a tested function in `dashboard/metrics.py` for every
    metric in the spec.
-3. **Views**: one screen or section per framed question.
+3. **Views**: one screen section per framed question, built as `design.md`
+   draws it, with the mockup's made-up numbers replaced by the data layer.
 4. **Filters**: the interactions the spec lists.
-5. **Polish and deploy**: labels, layout, headline takeaways, the live link in
-   the README.
+5. **Polish and deploy**: every style rule in `design.md` holds, `mockup.py`
+   is deleted, the live link is in the README.
 
 ## Tasks
 
@@ -37,7 +38,7 @@ Each task becomes one Issue whose body has:
 - **Goal**: one sentence in business language.
 - **Acceptance criteria**: the Given / When / Then lines from the spec it covers.
 - **Tests that prove it**: the reconciliation and acceptance tests to write first.
-- **Files it touches**.
+- **Files it touches**, and for a view, the `design.md` section it builds.
 - **Depends on**: the Issue numbers that must merge first.
 
 ## Steps

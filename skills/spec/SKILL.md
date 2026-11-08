@@ -53,4 +53,4 @@ interactions · Acceptance criteria · Out of scope.
 Done when every framed question has at least one metric with a complete
 definition and at least one acceptance criterion, and the student has read
 the file and agreed. Then suggest committing it and running
-`/dashkit:roadmap`.
+`/dashkit:design`.

@@ -8,7 +8,7 @@
     {
       "name": "dashkit",
       "source": "./",
-      "description": "Spec, roadmap, tests first, one task at a time, and a dashboard review."
+      "description": "Spec, design, roadmap, tests first, one task at a time, and a dashboard review."
     }
   ]
 }

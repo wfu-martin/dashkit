@@ -1,9 +1,10 @@
 # dashkit
 
-Five Claude Code skills for building a dashboard the way a disciplined team
+Six Claude Code skills for building a dashboard the way a disciplined team
 does: a spec that turns a stakeholder's questions into testable
-requirements, a roadmap of small tasks, tests before code, one task at a
-time with a separate review, and a final review of the dashboard itself.
+requirements, a design signed off on a mockup, a roadmap of small tasks,
+tests before code, one task at a time with a separate review, and a final
+review of the dashboard itself.
 
 ---
 
@@ -27,10 +28,11 @@ To update by hand at any time: `/plugin` → **Installed** → **dashkit** →
 | Type | What it does |
 |---|---|
 | `/dashkit:spec <brief>` | Interviews you one question at a time and writes `spec.md`: framed questions, metric definitions, screens, acceptance criteria, out of scope |
-| `/dashkit:roadmap` | Turns `spec.md` into `ROADMAP.md` phases and one GitHub Issue per task |
+| `/dashkit:design` | Picks a chart for every question, draws each screen in `design.md`, and builds `mockup.py` with made-up numbers for sign-off |
+| `/dashkit:roadmap` | Turns `spec.md` and `design.md` into `ROADMAP.md` phases and one GitHub Issue per task |
 | `/dashkit:tests-first <issue>` | Writes the failing tests for one Issue and explains what each proves |
 | `/dashkit:build-next` | One Issue start to finish: branch, tests, build, full suite, pull request, separate review, fix, merge |
-| `/dashkit:review-dashboard` | Checks every spec question is answered on screen and reviews the charts |
+| `/dashkit:review-dashboard` | Checks every spec question is answered on screen and every rule in `design.md` holds |
 
 They are built to run in a repository made from
 [`dashboard-starter`](https://github.com/foresightmetrix/dashboard-starter).
