@@ -6,16 +6,17 @@ requirements, a design signed off on a mockup, a roadmap of small tasks,
 tests before code, one task at a time with a separate review, and a final
 review of the dashboard itself.
 
-Each skill is a short list of numbered steps, and Claude stops at a gate
-between every two of them. At each gate it shows two progress lines (where
-the whole project stands, and where you are in the current skill), asks you
-to read the context percentage off your status line and recommends handing
-off at 50%, says in a sentence or two what the next step is for, and waits
-for your go-ahead. Work is saved in the repository and on GitHub, never only
-in the chat, so a teammate or a fresh session can pick it up from the last
-handoff comment. Every team member holds a role from `ROLES.md`; the role
-that owns a planning skill runs it and merges it, and each task is run and
-merged by the teammate it is assigned to.
+Each skill is a short list of numbered steps, with a gate between steps.
+At each gate Claude shows two progress lines (where the whole project
+stands, and where you are in the current skill), asks you to read the
+context percentage off your status line (or run `/context` if you have no
+status line) and recommends handing off at 50%, says in a sentence or two
+what the next step is for, and waits for your go-ahead. Work is saved in the
+repository and on GitHub, never only in the chat, so a teammate or a fresh
+session can pick it up from the last handoff comment. Every team member
+holds a role from `ROLES.md`; the role that owns a planning skill runs it and
+merges it, and each task is run and merged by the teammate it is assigned
+to. On a solo practice repository, one student holds every role.
 
 ---
 
@@ -47,7 +48,7 @@ older repository without `tools/progress.py`, the skills copy it in from
 | `/dashkit:design` | Picks a chart for every question, draws each screen in `design.md`, and builds `mockup.py` with made-up numbers for sign-off |
 | `/dashkit:roadmap` | Turns `spec.md` and `design.md` into `ROADMAP.md` phases and one GitHub Issue per task, each assigned to a teammate |
 | `/dashkit:tests-first <issue>` | First half of a task: branches, writes the failing tests for one Issue, explains what each proves, and hands off with the tests red |
-| `/dashkit:build-next` | Second half of a task, from red to merged: builds one test at a time, tidies, runs the full suite, opens the pull request, has it reviewed separately, settles each finding with you, and merges |
+| `/dashkit:build-next` | Second half of a task, from red to merged: builds one test at a time, tidies, runs the full suite, opens the pull request, has it reviewed separately, settles each finding with you, fixes the ones you choose to fix, and merges |
 | `/dashkit:review-dashboard` | Checks every spec question is answered on screen and every rule in `design.md` holds, then turns the fixes you choose into assigned Issues |
 
 Each task takes two commands, each in a fresh session: `/dashkit:tests-first`

@@ -113,15 +113,27 @@ Issue for a task, or on this skill's draft pull request for a planning skill.
    task: **Goal**, **Acceptance criteria** (the AC IDs it covers, with their
    Given / When / Then lines), **Tests that prove it** (named
    `test_ac<n>_…`), **Files it touches** (and the `design.md` section, for a
-   view), and **Depends on**. Label it with the phase it belongs to
+   view), and **Depends on** (any Issues it needs, plus the line "Start
+   this Issue after review pull request #<n> merges.", since its new ACs
+   reach `main` only then). Label it with the phase it belongs to
    (`phase-1` … `phase-5`; `gh label create` any that `gh label list` lacks).
-   Assign the new Issues as `/dashkit:roadmap` does: role first by the
-   phase's lean in `ROLES.md` (Phase 1 → Data Lead), then while anyone has
-   two or more of these Issues more than someone else, move the busiest
-   person's latest-ordered one to the least busy person; a single row in
-   `## Our team` gets every Issue. Show the table (finding · Issue title ·
-   AC IDs · phase · assignee) with each person's count for the student's
-   OK, then create each with
+
+   Draft an assignee for every one of these Issues from `## Our team` in
+   `ROLES.md`, role first: Phase 1 → Data Lead; data layer → Data Lead, Spec
+   Lead; views → Design Lead, Pitch Lead; filters → Spec Lead, Delivery
+   Lead; polish and deploy → Delivery Lead, Design Lead. A Stakeholder Lead
+   takes the Spec Lead's and Pitch Lead's leans. Where a phase leans toward
+   two roles, alternate between them in Issue order. Then balance by count:
+   while anyone has two or more of these Issues more than someone else, move
+   the busiest person's latest-ordered Issue to the least busy person. A
+   single row in `## Our team` gets every Issue. Assignment needs every
+   teammate's row: add any that are missing with the student first.
+
+   Show the table (finding · Issue title · AC IDs · phase · assignee) with
+   each person's count, and get the Delivery Lead's OK, named from
+   `ROLES.md`; with a single row in `## Our team`, the student approves. If
+   the Delivery Lead is not at hand, hand off with this step to resume at.
+   Once approved, create each with
    `gh issue create --title ... --body ... --assignee <username> --label phase-<n>`.
 
    Record the run in `ROADMAP.md`: add each new Issue number to its phase
@@ -130,14 +142,17 @@ Issue for a task, or on this skill's draft pull request for a planning skill.
    review, add below the last line) with
    `- YYYY-MM-DD: fixes in #n, #n` (today's date; `- YYYY-MM-DD: no fixes`
    when the student chose none). Commit and push. Done when every finding
-   has the student's call, `gh issue list` shows one Issue per chosen
-   finding with its AC IDs, assignee, and phase label, and
+   has the student's call, the Delivery Lead has approved the assignment
+   table, `gh issue list` shows one Issue per chosen finding with its AC
+   IDs, assignee, and phase label, every assignee appears in
+   `gh api repos/{owner}/{repo}/collaborators --jq '.[].login'`, and
    `## Dashboard review` in `ROADMAP.md` ends with today's dated line.
 6. **Merge.** Mark the pull request ready (`gh pr ready`) and ask the team
    to read it. Once they have, the driver merges it
    (`gh pr merge --squash --delete-branch`), then `git switch main` and
    `git pull`. If the team needs time to read, hand off with Merge as the
-   step to resume at. Done when the project line of
+   step to resume at, and say in the handoff that the fix Issues start
+   after this pull request merges. Done when the project line of
    `python tools/progress.py --skill review-dashboard --step 6` shows
    ✓ Review.
 
