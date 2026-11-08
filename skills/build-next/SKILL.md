@@ -55,7 +55,7 @@ file with a commit and a push. Hold the gate for Pick up, then start.
 
 Between steps there is a gate. At every gate, in this order:
 
-1. Run `python tools/progress.py --skill <this skill> --step <next step>`
+1. Run `python tools/progress.py --skill <this skill> --step <next step number>`
    (in a task, add `--issue <number>`) and show its two lines as printed.
    No `tools/progress.py`? Copy it from `wfu-martin/dashboard-starter` with
    `gh api` first.
