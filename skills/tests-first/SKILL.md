@@ -8,9 +8,9 @@ argument-hint: "[issue number, optional]"
 # Tests first
 
 The first half of a task: write the tests that will prove the Issue is done,
-watch them fail, and hand off. Red is the goal: a test that fails before the
-code exists proves it checks something real. `/dashkit:build-next` takes the
-branch from red to merged in a fresh session.
+watch them fail for the right reason, and hand off. Red is the goal: a test
+that fails before the code exists proves it checks something real.
+`/dashkit:build-next` takes the branch from red to merged in a fresh session.
 
 Issue: $ARGUMENTS (if empty, step 2 finds it).
 
@@ -102,19 +102,34 @@ Issue for a task, or on this skill's draft pull request for a planning skill.
 
    Name each test after the AC it proves, `test_ac<n>_…`: AC-3 gives
    `test_ac3_revenue_reconciles_to_invoices`. Follow
-   `tests/test_example_reconciliation.py` for the pattern. Write tests only;
-   the functions and screens they call are built in `/dashkit:build-next`.
-   Done when every AC ID the Issue lists has a test named after it, every
-   figure those ACs show has a reconciliation test, and every test under the
-   Issue's **Tests that prove it** exists.
-5. **Tests red.** Run `pytest`. Each new test must fail because the function
-   or screen it calls does not exist yet. Fix any other failure first: a
-   typo, a wrong fixture or query, a test that already passes. Then explain
-   each new test in one plain sentence: what it proves about the dashboard
-   and why that matters to the stakeholder. Done when `pytest` shows every
-   new test failing for that one reason, every test already on `main` still
-   passing, and the student has heard a sentence for each new test.
-6. **Commit and hand off.** Commit the tests, push the branch
+   `tests/test_example_reconciliation.py` for the pattern.
+
+   So the tests can import what they call, add each function the Issue
+   needs as a **stub** in the file the Issue names (for example
+   `dashboard/metrics.py`): the agreed name, arguments, and docstring, with
+   a body of `raise NotImplementedError("Issue #<number>")`. Tests and stubs
+   are the whole change; `/dashkit:build-next` replaces each stub with real
+   code. Done when every AC ID the Issue lists has a test named after it,
+   every figure those ACs show has a reconciliation test, every test under
+   the Issue's **Tests that prove it** exists, and every function they call
+   exists as a stub.
+5. **Tests red.** Run `pytest -rs`. The one right reason for a new test to
+   fail is the stub's `NotImplementedError` (for a screen test, the screen
+   element being absent). Any other failure or error (an import that does
+   not resolve, a wrong fixture, a test that already passes) is a
+   wrong-reason failure: fix it now. A skipped test is neither red nor
+   green: if any of the Issue's tests skip (usually no
+   `.streamlit/secrets.toml`), set up the connection and rerun. For each
+   reconciliation test, run its independent SQL once, for example
+   `python -c "from dashboard import db, metrics; print(metrics.read_sql(db.engine_from_secrets(), '<query>'))"`,
+   and show the student the number it returns, so a bad query is caught
+   now. Then explain each new test in one plain sentence: what it proves
+   about the dashboard and why that matters to the stakeholder. Done when
+   `pytest -rs` shows every new test failing on `NotImplementedError` (or
+   the absent screen element), none of them skipped, every test already on
+   `main` still passing, and the student has seen each independent number
+   and heard a sentence for each new test.
+6. **Commit and hand off.** Commit the tests and stubs, push the branch
    (`git push -u origin <branch>`), and post the handoff comment on the
    Issue: the tests written, that they are red, any spec change and who
    approved it, `/dashkit:build-next` as the next step, and the student's
@@ -124,6 +139,6 @@ Issue for a task, or on this skill's draft pull request for a planning skill.
    `/dashkit:build-next`.
 
 **Done when** the Issue's branch is on GitHub with every test the Issue
-names failing for the expected reason, only tests (and any approved spec
-change) committed on it, and the handoff on the Issue. After `/clear`, the
+names failing on its stub, only tests, stubs, and any approved spec change
+committed on it, and the handoff on the Issue. After `/clear`, the
 student runs `/dashkit:build-next`.
