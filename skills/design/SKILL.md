@@ -14,7 +14,7 @@ Read `spec.md` (framed questions, metric definitions, screens and
 interactions) and `design.md`, whose style rules bind every choice below.
 No `design.md` or `dashboard/charts.py`? The repository predates them: copy
 `design.md`, `dashboard/charts.py`, and `.streamlit/config.toml` from
-`foresightmetrix/dashboard-starter` with `gh api`.
+`wfu-martin/dashboard-starter` with `gh api`.
 
 ## Steps
 

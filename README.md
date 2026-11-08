@@ -13,7 +13,7 @@ review of the dashboard itself.
 Inside Claude Code:
 
 ```
-/plugin marketplace add foresightmetrix/dashkit
+/plugin marketplace add wfu-martin/dashkit
 /plugin install dashkit@dashkit
 ```
 
@@ -35,7 +35,7 @@ To update by hand at any time: `/plugin` → **Installed** → **dashkit** →
 | `/dashkit:review-dashboard` | Checks every spec question is answered on screen and every rule in `design.md` holds |
 
 They are built to run in a repository made from
-[`dashboard-starter`](https://github.com/foresightmetrix/dashboard-starter).
+[`dashboard-starter`](https://github.com/wfu-martin/dashboard-starter).
 
 ## Extras
 
