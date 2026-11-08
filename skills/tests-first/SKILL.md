@@ -137,8 +137,10 @@ planning skill.
    `main` still passing, and the student has seen each independent number
    and heard a sentence for each new test. With no new tests: done when
    `pytest -rs` reports none failed or errored.
-6. **Commit and hand off.** Commit the tests and stubs (with no new tests,
-   there is nothing to commit), push the branch
+6. **Commit and hand off.** Commit the tests and stubs. With no new tests
+   and no spec change, make one empty commit instead
+   (`git commit --allow-empty -m "Start #<number>: no new tests"`) so the
+   pull request in `/dashkit:build-next` has a commit to open on. Push the branch
    (`git push -u origin <branch>`), and post the handoff comment on the
    Issue: the tests written and that they are red (or "no new tests"), any
    spec change and who approved it, `/dashkit:build-next` step 2 (Build) as
