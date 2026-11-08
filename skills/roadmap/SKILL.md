@@ -16,8 +16,9 @@ If `/usage` leaves room, suggest `/model opus`; otherwise Sonnet with
 
 **Driver:** the Delivery Lead. Match `gh api user --jq .login` against
 `## Our team` in `ROLES.md`. No row for this login, or an empty table: fill
-in the student's row (name, GitHub username, role) first. If the row holds
-another role, name the driver and ask whether to continue.
+in the student's row (name, GitHub username, role) first. One row in
+`## Our team`: that student is the driver (they hold every role). Otherwise,
+if the row holds another role, name the driver and ask whether to continue.
 
 **Interview:** inside a step, settle changes one question at a time, each
 with your recommendation first and a one-line reason.
@@ -31,11 +32,11 @@ Gate commands in this skill use `--skill roadmap`.
    (`gh pr list --head roadmap --state open`), read the latest handoff
    comment and offer to resume at the step it names; with no pull request
    or no comment, propose the step the files show you reached.
-2. With no `roadmap` branch, create it from an up-to-date `main`.
+2. With no `roadmap` branch, create it from an up-to-date `main`, then
+   `git commit --allow-empty -m "Start the roadmap"`, push, and open a draft
+   pull request (`gh pr create --draft`). The handoffs go on it.
 3. Read `spec.md`, `design.md`, `ROADMAP.md`, and `ROLES.md`.
-4. End every step that changed a file with a commit and a push. After a
-   push from a branch with no pull request, open a draft one
-   (`gh pr create --draft`).
+4. End every step that changed a file with a commit and a push.
 
 Then hold the gate for the step you start at.
 
@@ -59,8 +60,9 @@ Run the commands yourself; the student approves each one. Point to the part
 of the output worth reading. The student decides; you recommend.
 
 **Handoff:** commit and push the work in progress, then post a comment (what
-is done, what is left, the step to resume at, and the student's name) on the
-Issue for a task, or on this skill's draft pull request for a planning skill.
+is done, what is left, the skill and step to resume at, and the student's
+name) on the Issue for a task, or on this skill's draft pull request for a
+planning skill.
 
 **Roles:** read `ROLES.md`. A single row means one student holds every role.
 <!-- /gate -->
@@ -95,10 +97,18 @@ Issue for a task, or on this skill's draft pull request for a planning skill.
    - **Files it touches**, and for a view, the `design.md` section it builds.
    - **Depends on**: the tasks that must merge first.
 
+   A task with no figure (Phase 1's connection and hello-world deploy,
+   Phase 5's removal of `mockup.py`, live link, and final deploy) lists
+   checkable task criteria under **Acceptance criteria** in place of AC IDs
+   ("the README's live link opens the app"), and under **Tests that prove
+   it**: "Tests: none new; the full suite stays green."
+
    Show the tasks as one table (phase · task · AC IDs · tests · depends on)
    and settle changes one question at a time. Write the agreed table under a
    `## Task draft` heading at the end of `ROADMAP.md`. Done when every AC ID
-   in `spec.md` belongs to at least one task and every task names its tests.
+   in `spec.md` belongs to at least one task, every task with a figure names
+   its tests, and every task without one lists its task criteria and
+   "Tests: none new".
 3. **Assign.** Draft an assignee for every task from `## Our team` in
    `ROLES.md`, role first: Phase 1 → Data Lead; data layer → Data Lead, Spec
    Lead; views → Design Lead, Pitch Lead; filters → Spec Lead, Delivery
@@ -136,6 +146,7 @@ Issue for a task, or on this skill's draft pull request for a planning skill.
    `python tools/progress.py --skill roadmap --step 6` shows ✓ Roadmap.
 
 **Done when** `ROADMAP.md` is merged to `main`, every AC ID in `spec.md`
-belongs to at least one Issue, and every Issue names its tests, its assignee,
-and its phase label. Tell the student to `/clear`; each assignee starts their
+belongs to at least one Issue, every Issue with a figure names its tests
+(one without names its task criteria), and every Issue has its assignee and
+its phase label. Tell the student to `/clear`; each assignee starts their
 first Issue with `/dashkit:tests-first <issue number>`, in dependency order.

@@ -17,9 +17,10 @@ Issue: $ARGUMENTS (if empty, step 1 finds it).
 **Driver:** the Issue's assignee, who also merges the pull request. Match
 `gh api user --jq .login` against `## Our team` in `ROLES.md`. No row for
 this login, or an empty table: fill in the student's row (name, GitHub
-username, role) first. If the Issue is assigned to someone else, name the
-assignee and ask whether to continue; the Delivery Lead reassigns Issues on
-GitHub.
+username, role) first. One row in `## Our team`: that student is the driver
+(they hold every role). Otherwise, if the Issue is assigned to someone else,
+name the assignee and ask whether to continue; the Delivery Lead reassigns
+Issues on GitHub.
 
 Report every step in plain business language: what changed for the person
 using the dashboard, and what the student should check.
@@ -70,8 +71,9 @@ Run the commands yourself; the student approves each one. Point to the part
 of the output worth reading. The student decides; you recommend.
 
 **Handoff:** commit and push the work in progress, then post a comment (what
-is done, what is left, the step to resume at, and the student's name) on the
-Issue for a task, or on this skill's draft pull request for a planning skill.
+is done, what is left, the skill and step to resume at, and the student's
+name) on the Issue for a task, or on this skill's draft pull request for a
+planning skill.
 
 **Roles:** read `ROLES.md`. A single row means one student holds every role.
 <!-- /gate -->
@@ -85,17 +87,18 @@ Issue for a task, or on this skill's draft pull request for a planning skill.
    No such branch, or its latest handoff names a `/dashkit:tests-first`
    step: tell the student to run `/dashkit:tests-first` first, and stop.
    Switch to the branch, `git pull`, and read the Issue and its latest
-   handoff comment (`gh issue view <number> --comments`). A tests-first
-   handoff starts at Build; a build-next handoff names the step to resume
-   at; with no comment, propose the step the files show you reached. Then
-   read only what the Issue names: its `spec.md` sections, its `design.md`
-   section, its files, and its tests. Done when the student has confirmed
-   the Issue and the step to start at, the branch is up to date with
-   `origin`, and `pytest -rs` shows the Issue's tests in the state the
-   handoff describes (red on their stubs' `NotImplementedError`, for a fresh
-   start). A skipped test is neither red nor green: if any of the Issue's
-   tests skip (usually no `.streamlit/secrets.toml`), set up the connection
-   and rerun before going on.
+   handoff comment (`gh issue view <number> --comments`). Offer to resume
+   at the `/dashkit:build-next` step it names (the tests-first handoff
+   names Build); with no comment, propose the step the files show you
+   reached. Then read only what the Issue names: its `spec.md` sections,
+   its `design.md` section, its files, and its tests. Done when the student
+   has confirmed the Issue and the step to start at, the branch is up to
+   date with `origin`, and `pytest -rs` shows the Issue's tests in the state
+   the handoff describes: for a fresh start, red on their stubs'
+   `NotImplementedError`, or, when the handoff says "no new tests", none
+   failed or errored. A skipped test is neither red nor green: if any of the
+   Issue's tests skip (usually no `.streamlit/secrets.toml`), set up the
+   connection and rerun before going on.
 2. **Build.** One failing test at a time: replace the stub it calls with
    real code (in the files the Issue names), run that test
    (`pytest tests/<file>::<test>`), report it green in one line ("test_ac3_…
@@ -103,12 +106,17 @@ Issue for a task, or on this skill's draft pull request for a planning skill.
    next. Tests stay locked. Done when every test the Issue names passes, no
    `NotImplementedError` stub for this Issue is left, and each test file is
    unchanged except through an approved locked-test gate.
+
+   When the handoff says "no new tests", work through the Issue's task
+   criteria the same way, one at a time, showing the student the evidence
+   for each (the app reading the database, the live link opening). Done
+   when every task criterion is met and the student has seen its evidence.
 3. **Tidy.** Make the new code clearer with the same behavior: plainer
    names, repeated code folded into one function, a short comment where a
    reader would stop. Nothing new is added: no feature, filter, or test. Run
-   the Issue's tests after each change. Done when the Issue's tests still
-   pass and the student has seen each tidy change in one line, or has been
-   told the code already reads clearly.
+   the Issue's tests (with no new tests, the full suite) after each change.
+   Done when those tests still pass and the student has seen each tidy
+   change in one line, or has been told the code already reads clearly.
 4. **Full suite.** Run `pytest -rs` on everything. Any failure is fixed in
    the code, with the tests locked, before the next step: nothing merges
    red. Done when `pytest -rs` reports none failed or errored and none of
@@ -123,7 +131,8 @@ Issue for a task, or on this skill's draft pull request for a planning skill.
    and `design.md`, and ask it to check the diff against the spec, the
    Issue's acceptance criteria, and the drawing and style rules in
    `design.md`: wrong numbers, metric definitions not followed, missing
-   tests (every AC ID in the Issue has a test named after it), SQL that is
+   tests (every AC ID in the Issue has a test named after it; an Issue with
+   no figure meets its task criteria instead), SQL that is
    slow or repeats rows, a screen that departs from its drawing or breaks a
    style rule (quote the rule), secrets, and any box that lets a viewer
    type SQL. It posts its findings as one comment on the pull request
@@ -133,15 +142,15 @@ Issue for a task, or on this skill's draft pull request for a planning skill.
 7. **Decide findings.** Walk the findings one at a time, most important
    first: your recommendation (fix or keep) with a one-line reason, then
    what the finding means for the dashboard. The student decides each.
-   Group trivial findings (wording, a label) into one decision. Done when every finding
-   has the student's call, fix or keep, with the reason for each keep (or
-   the review found nothing).
+   Group trivial findings (wording, a label) into one decision. Done when
+   every finding has the student's call, fix or keep, with the reason for
+   each keep (or the review found nothing).
 8. **Fix.** Fix each finding the student chose, with the tests locked and
    spec first. Run the full suite (`pytest -rs`) and push. Then reply on the
    pull request (`gh pr comment`) with one line per finding: fixed (name the
    commit), or kept and why. Done when the full suite meets the Full suite
-   step's bar after the last fix, the
-   branch is pushed, and the reply covers every finding.
+   step's bar after the last fix, the branch is pushed, and the reply
+   covers every finding.
 9. **Merge.** `gh pr merge --squash --delete-branch`, then
    `git switch main` and `git pull`. Post the handoff comment on the Issue:
    what changed on screen, what to look at, anything the next tasks should
@@ -153,4 +162,6 @@ Issue for a task, or on this skill's draft pull request for a planning skill.
 **Done when** the pull request is merged with the full suite green, every
 review finding has a recorded decision, and the Issue is closed with its
 handoff. After `/clear`, the student starts their next Issue with
-`/dashkit:tests-first`.
+`/dashkit:tests-first`. When no open Issues remain, the Pitch Lead (or the
+Stakeholder Lead; with one row in `## Our team`, the student) runs
+`/dashkit:review-dashboard`.

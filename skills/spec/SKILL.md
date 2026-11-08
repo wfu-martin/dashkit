@@ -21,8 +21,9 @@ otherwise Sonnet with `/effort high`.
 **Driver:** the Spec Lead, or the Stakeholder Lead on a team of four. Match
 `gh api user --jq .login` against `## Our team` in `ROLES.md`. No row for
 this login, or an empty table: fill in the student's row (name, GitHub
-username, role) first. If the row holds another role, name the driver and
-ask whether to continue.
+username, role) first. One row in `## Our team`: that student is the driver
+(they hold every role). Otherwise, if the row holds another role, name the
+driver and ask whether to continue.
 
 **Interview:** inside a step, ask one question at a time, each with your
 recommended answer first and a one-line reason, and wait for the answer
@@ -37,14 +38,14 @@ Gate commands in this skill use `--skill spec`.
    (`gh pr list --head spec --state open`), read the latest handoff
    comment and offer to resume at the step it names; with no pull request
    or no comment, propose the step the files show you reached.
-2. With no `spec` branch, create it from an up-to-date `main`. Give
+2. With no `spec` branch, create it from an up-to-date `main`, then
+   `git commit --allow-empty -m "Start the spec"`, push, and open a draft
+   pull request (`gh pr create --draft`). The handoffs go on it. Give
    `spec.md` at the repository root these headings, exactly, in this order
    (the tracker reads them): `## Stakeholder and decision`,
    `## Framed questions`, `## Metric definitions`, `## Data sources`,
    `## Screens and interactions`, `## Acceptance criteria`, `## Out of scope`.
-3. End every step that changed a file with a commit and a push. After a
-   push from a branch with no pull request, open a draft one
-   (`gh pr create --draft`).
+3. End every step that changed a file with a commit and a push.
 
 Then hold the gate for the step you start at.
 
@@ -68,8 +69,9 @@ Run the commands yourself; the student approves each one. Point to the part
 of the output worth reading. The student decides; you recommend.
 
 **Handoff:** commit and push the work in progress, then post a comment (what
-is done, what is left, the step to resume at, and the student's name) on the
-Issue for a task, or on this skill's draft pull request for a planning skill.
+is done, what is left, the skill and step to resume at, and the student's
+name) on the Issue for a task, or on this skill's draft pull request for a
+planning skill.
 
 **Roles:** read `ROLES.md`. A single row means one student holds every role.
 <!-- /gate -->

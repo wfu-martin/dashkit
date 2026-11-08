@@ -16,9 +16,10 @@ Issue: $ARGUMENTS (if empty, step 2 finds it).
 
 **Driver:** the Issue's assignee. Match `gh api user --jq .login` against
 `## Our team` in `ROLES.md`. No row for this login, or an empty table: fill
-in the student's row (name, GitHub username, role) first. If the Issue is
-assigned to someone else, name the assignee and ask whether to continue;
-the Delivery Lead reassigns Issues on GitHub.
+in the student's row (name, GitHub username, role) first. One row in
+`## Our team`: that student is the driver (they hold every role). Otherwise,
+if the Issue is assigned to someone else, name the assignee and ask whether
+to continue; the Delivery Lead reassigns Issues on GitHub.
 
 Report in plain business language: what each test proves for the person
 using the dashboard.
@@ -43,10 +44,11 @@ Gate commands in this skill use `--skill tests-first`, plus
    remote, for the Issue in `$ARGUMENTS` or, with none given, for each open
    Issue assigned to the student (`gh issue list --assignee @me --state open`).
    If one exists, switch to it and read the Issue's latest handoff comment
-   (`gh issue view <number> --comments`). Offer to resume at the step it
-   names; with no comment, propose the step the files show you reached. A
-   handoff that names `/dashkit:build-next` means this half is done: tell
-   the student to run `/dashkit:build-next` and stop.
+   (`gh issue view <number> --comments`). A handoff that names a
+   `/dashkit:tests-first` step: offer to resume there; with no comment,
+   propose the step the files show you reached. A handoff that names
+   `/dashkit:build-next` means this half is done: tell the student to run
+   `/dashkit:build-next` and stop.
 2. End every step that changed a file with a commit and a push.
 
 Then hold the gate for the step you start at.
@@ -71,8 +73,9 @@ Run the commands yourself; the student approves each one. Point to the part
 of the output worth reading. The student decides; you recommend.
 
 **Handoff:** commit and push the work in progress, then post a comment (what
-is done, what is left, the step to resume at, and the student's name) on the
-Issue for a task, or on this skill's draft pull request for a planning skill.
+is done, what is left, the skill and step to resume at, and the student's
+name) on the Issue for a task, or on this skill's draft pull request for a
+planning skill.
 
 **Roles:** read `ROLES.md`. A single row means one student holds every role.
 <!-- /gate -->
@@ -113,6 +116,10 @@ Issue for a task, or on this skill's draft pull request for a planning skill.
    every figure those ACs show has a reconciliation test, every test under
    the Issue's **Tests that prove it** exists, and every function they call
    exists as a stub.
+
+   An Issue with no figure says "Tests: none new" under **Tests that prove
+   it**: confirm that with the student and write nothing. Done when the
+   student has agreed the Issue needs no new tests.
 5. **Tests red.** Run `pytest -rs`. The one right reason for a new test to
    fail is the stub's `NotImplementedError` (for a screen test, the screen
    element being absent). Any other failure or error (an import that does
@@ -128,17 +135,19 @@ Issue for a task, or on this skill's draft pull request for a planning skill.
    `pytest -rs` shows every new test failing on `NotImplementedError` (or
    the absent screen element), none of them skipped, every test already on
    `main` still passing, and the student has seen each independent number
-   and heard a sentence for each new test.
-6. **Commit and hand off.** Commit the tests and stubs, push the branch
+   and heard a sentence for each new test. With no new tests: done when
+   `pytest -rs` reports none failed or errored.
+6. **Commit and hand off.** Commit the tests and stubs (with no new tests,
+   there is nothing to commit), push the branch
    (`git push -u origin <branch>`), and post the handoff comment on the
-   Issue: the tests written, that they are red, any spec change and who
-   approved it, `/dashkit:build-next` as the next step, and the student's
-   name. Tell the student to `/clear`. Done when `git status` shows a clean
-   tree up to date with its `origin` branch and
-   `gh issue view <number> --comments` shows the handoff naming
-   `/dashkit:build-next`.
+   Issue: the tests written and that they are red (or "no new tests"), any
+   spec change and who approved it, `/dashkit:build-next` step 2 (Build) as
+   the skill and step to resume at, and the student's name. Tell the student
+   to `/clear`. Done when `git status` shows a clean tree up to date with
+   its `origin` branch and `gh issue view <number> --comments` shows the
+   handoff naming `/dashkit:build-next`.
 
 **Done when** the Issue's branch is on GitHub with every test the Issue
-names failing on its stub, only tests, stubs, and any approved spec change
-committed on it, and the handoff on the Issue. After `/clear`, the
-student runs `/dashkit:build-next`.
+names failing on its stub (or, for an Issue with no figure, no new tests),
+only tests, stubs, and any approved spec change committed on it, and the
+handoff on the Issue. After `/clear`, the student runs `/dashkit:build-next`.

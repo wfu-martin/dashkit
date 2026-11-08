@@ -13,8 +13,9 @@ not.
 
 **Driver:** the Design Lead. Match `gh api user --jq .login` against
 `## Our team` in `ROLES.md`. No row for this login, or an empty table: fill
-in the student's row (name, GitHub username, role) first. If the row holds
-another role, name the driver and ask whether to continue.
+in the student's row (name, GitHub username, role) first. One row in
+`## Our team`: that student is the driver (they hold every role). Otherwise,
+if the row holds another role, name the driver and ask whether to continue.
 
 **Interview:** inside a step, settle choices one question at a time, each
 with your recommendation first and a one-line reason.
@@ -28,15 +29,15 @@ Gate commands in this skill use `--skill design`.
    (`gh pr list --head design --state open`), read the latest handoff
    comment and offer to resume at the step it names; with no pull request
    or no comment, propose the step the files show you reached.
-2. With no `design` branch, create it from an up-to-date `main`.
+2. With no `design` branch, create it from an up-to-date `main`, then
+   `git commit --allow-empty -m "Start the design"`, push, and open a draft
+   pull request (`gh pr create --draft`). The handoffs go on it.
 3. Read `spec.md` (framed questions, metric definitions, screens and
    interactions) and `design.md`, whose style rules bind every choice below.
    No `design.md` or `dashboard/charts.py`? The repository predates them:
    copy `design.md`, `dashboard/charts.py`, and `.streamlit/config.toml` from
    `wfu-martin/dashboard-starter` with `gh api`.
-4. End every step that changed a file with a commit and a push. After a
-   push from a branch with no pull request, open a draft one
-   (`gh pr create --draft`).
+4. End every step that changed a file with a commit and a push.
 
 Then hold the gate for the step you start at.
 
@@ -60,8 +61,9 @@ Run the commands yourself; the student approves each one. Point to the part
 of the output worth reading. The student decides; you recommend.
 
 **Handoff:** commit and push the work in progress, then post a comment (what
-is done, what is left, the step to resume at, and the student's name) on the
-Issue for a task, or on this skill's draft pull request for a planning skill.
+is done, what is left, the skill and step to resume at, and the student's
+name) on the Issue for a task, or on this skill's draft pull request for a
+planning skill.
 
 **Roles:** read `ROLES.md`. A single row means one student holds every role.
 <!-- /gate -->
