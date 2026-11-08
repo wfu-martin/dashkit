@@ -12,8 +12,9 @@ signed off on a mockup is cheap to change, and one built on real queries is
 not.
 
 **Driver:** the Design Lead. Match `gh api user --jq .login` against
-`## Our team` in `ROLES.md`; if that row holds another role, name the driver
-and ask whether to continue.
+`## Our team` in `ROLES.md`. No row for this login, or an empty table: fill
+in the student's row (name, GitHub username, role) first. If the row holds
+another role, name the driver and ask whether to continue.
 
 **Interview:** inside a step, settle choices one question at a time, each
 with your recommendation first and a one-line reason.
@@ -22,17 +23,20 @@ with your recommendation first and a one-line reason.
 
 Gate commands in this skill use `--skill design`.
 
-1. Resume check: after `git fetch`, look for a `design` branch and its open
-   draft pull request (`gh pr list --head design --draft`). If both exist,
-   read the latest handoff comment and offer to resume at the step it names.
-2. Otherwise, from an up-to-date `main`, create the branch `design`.
+1. Resume check: after `git fetch`, look for a `design` branch, local or
+   remote. If it exists, switch to it. If it has an open pull request
+   (`gh pr list --head design --state open`), read the latest handoff
+   comment and offer to resume at the step it names; with no pull request
+   or no comment, propose the step the files show you reached.
+2. With no `design` branch, create it from an up-to-date `main`.
 3. Read `spec.md` (framed questions, metric definitions, screens and
    interactions) and `design.md`, whose style rules bind every choice below.
    No `design.md` or `dashboard/charts.py`? The repository predates them:
    copy `design.md`, `dashboard/charts.py`, and `.streamlit/config.toml` from
    `wfu-martin/dashboard-starter` with `gh api`.
-4. End every step that changed a file with a commit and a push. After the
-   first push, open a draft pull request (`gh pr create --draft`).
+4. End every step that changed a file with a commit and a push. After a
+   push from a branch with no pull request, open a draft one
+   (`gh pr create --draft`).
 
 Then hold the gate for the step you start at.
 
@@ -98,7 +102,7 @@ Issue for a task, or on this skill's draft pull request for a planning skill.
    `mockup.py` still match, and `pytest` passes.
 5. **Merge.** Mark the pull request ready (`gh pr ready`) and ask the team
    to read it. Once they have, the driver merges it
-   (`gh pr merge --merge --delete-branch`), then `git switch main` and
+   (`gh pr merge --squash --delete-branch`), then `git switch main` and
    `git pull`. If the team needs time to read, hand off with Merge as the
    step to resume at. Done when the project line of
    `python tools/progress.py --skill design --step 5` shows ✓ Design.

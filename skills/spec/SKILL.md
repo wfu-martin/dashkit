@@ -19,8 +19,10 @@ This is thinking work. If `/usage` leaves room, suggest `/model opus`;
 otherwise Sonnet with `/effort high`.
 
 **Driver:** the Spec Lead, or the Stakeholder Lead on a team of four. Match
-`gh api user --jq .login` against `## Our team` in `ROLES.md`; if that row
-holds another role, name the driver and ask whether to continue.
+`gh api user --jq .login` against `## Our team` in `ROLES.md`. No row for
+this login, or an empty table: fill in the student's row (name, GitHub
+username, role) first. If the row holds another role, name the driver and
+ask whether to continue.
 
 **Interview:** inside a step, ask one question at a time, each with your
 recommended answer first and a one-line reason, and wait for the answer
@@ -30,16 +32,19 @@ before the next. Write each answer into `spec.md` as it lands.
 
 Gate commands in this skill use `--skill spec`.
 
-1. Resume check: after `git fetch`, look for a `spec` branch and its open
-   draft pull request (`gh pr list --head spec --draft`). If both exist,
-   read the latest handoff comment and offer to resume at the step it names.
-2. Otherwise, from an up-to-date `main`, create the branch `spec`. Give
+1. Resume check: after `git fetch`, look for a `spec` branch, local or
+   remote. If it exists, switch to it. If it has an open pull request
+   (`gh pr list --head spec --state open`), read the latest handoff
+   comment and offer to resume at the step it names; with no pull request
+   or no comment, propose the step the files show you reached.
+2. With no `spec` branch, create it from an up-to-date `main`. Give
    `spec.md` at the repository root these headings, exactly, in this order
    (the tracker reads them): `## Stakeholder and decision`,
    `## Framed questions`, `## Metric definitions`, `## Data sources`,
    `## Screens and interactions`, `## Acceptance criteria`, `## Out of scope`.
-3. End every step that changed `spec.md` with a commit and a push. After the
-   first push, open a draft pull request (`gh pr create --draft`).
+3. End every step that changed a file with a commit and a push. After a
+   push from a branch with no pull request, open a draft one
+   (`gh pr create --draft`).
 
 Then hold the gate for the step you start at.
 
@@ -112,7 +117,7 @@ Issue for a task, or on this skill's draft pull request for a planning skill.
    and at least one numbered AC, and the student has typed that they agree.
 8. **Merge.** Mark the pull request ready (`gh pr ready`) and ask the team
    to read it. Once they have, the driver merges it
-   (`gh pr merge --merge --delete-branch`), then `git switch main` and
+   (`gh pr merge --squash --delete-branch`), then `git switch main` and
    `git pull`. If the team needs time to read, hand off with Merge as the
    step to resume at. Done when the project line of
    `python tools/progress.py --skill spec --step 8` shows ✓ Spec.

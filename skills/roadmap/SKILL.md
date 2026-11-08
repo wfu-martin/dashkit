@@ -15,8 +15,9 @@ If `/usage` leaves room, suggest `/model opus`; otherwise Sonnet with
 `/effort high`.
 
 **Driver:** the Delivery Lead. Match `gh api user --jq .login` against
-`## Our team` in `ROLES.md`; if that row holds another role, name the driver
-and ask whether to continue.
+`## Our team` in `ROLES.md`. No row for this login, or an empty table: fill
+in the student's row (name, GitHub username, role) first. If the row holds
+another role, name the driver and ask whether to continue.
 
 **Interview:** inside a step, settle changes one question at a time, each
 with your recommendation first and a one-line reason.
@@ -25,13 +26,16 @@ with your recommendation first and a one-line reason.
 
 Gate commands in this skill use `--skill roadmap`.
 
-1. Resume check: after `git fetch`, look for a `roadmap` branch and its open
-   draft pull request (`gh pr list --head roadmap --draft`). If both exist,
-   read the latest handoff comment and offer to resume at the step it names.
-2. Otherwise, from an up-to-date `main`, create the branch `roadmap`.
+1. Resume check: after `git fetch`, look for a `roadmap` branch, local or
+   remote. If it exists, switch to it. If it has an open pull request
+   (`gh pr list --head roadmap --state open`), read the latest handoff
+   comment and offer to resume at the step it names; with no pull request
+   or no comment, propose the step the files show you reached.
+2. With no `roadmap` branch, create it from an up-to-date `main`.
 3. Read `spec.md`, `design.md`, `ROADMAP.md`, and `ROLES.md`.
-4. End every step that changed a file with a commit and a push. After the
-   first push, open a draft pull request (`gh pr create --draft`).
+4. End every step that changed a file with a commit and a push. After a
+   push from a branch with no pull request, open a draft one
+   (`gh pr create --draft`).
 
 Then hold the gate for the step you start at.
 
@@ -103,8 +107,8 @@ Issue for a task, or on this skill's draft pull request for a planning skill.
    two roles, alternate between them in task order. Then balance by count:
    while anyone has two or more tasks more than someone else, move the
    busiest person's latest-ordered task to the least busy person. A single
-   row in `## Our team` gets every task. An empty `## Our team`: fill it
-   with the student first (name, GitHub username, role per teammate).
+   row in `## Our team` gets every task. Assignment needs every teammate's
+   row: add any that are missing with the student first.
 
    Add an assignee column to the task draft, show it with each person's
    count, and ask the Delivery Lead to approve it. Done when the Delivery
@@ -126,7 +130,7 @@ Issue for a task, or on this skill's draft pull request for a planning skill.
    the critical path replaces its placeholder, and `## Task draft` is gone.
 6. **Merge.** Mark the pull request ready (`gh pr ready`) and ask the team
    to read it. Once they have, the driver merges it
-   (`gh pr merge --merge --delete-branch`), then `git switch main` and
+   (`gh pr merge --squash --delete-branch`), then `git switch main` and
    `git pull`. If the team needs time to read, hand off with Merge as the
    step to resume at. Done when the project line of
    `python tools/progress.py --skill roadmap --step 6` shows ✓ Roadmap.
