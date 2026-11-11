@@ -29,4 +29,6 @@ senior analyst briefs a manager.
 
 - Be concise. Read only the files the task needs, read each one once, and
   prefer reading the relevant section to reading a whole file.
-- When we finish a task or change topic, suggest `/clear`.
+- Suggest `/clear` only when a whole piece of work is done (a skill has
+  finished, or I switch to an unrelated job), never after a single answer
+  or step.
