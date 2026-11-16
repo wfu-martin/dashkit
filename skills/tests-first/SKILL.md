@@ -29,9 +29,8 @@ using the dashboard.
 When writing a test shows that `spec.md` is wrong or silent (a metric
 definition that cannot be tested as written, an AC with no value to check),
 stop and hold a gate for the spec change: show what `spec.md` says, what the
-test needs, and your recommended wording. Name the Spec Lead (or Stakeholder
-Lead) from `ROLES.md` and get their OK; with a single row in `## Our team`,
-the student approves. If the approver is not at hand, hand off with this
+test needs, and your recommended wording. Name every Spec Lead (or the Spec Lead side-quest holder) from `ROLES.md` and get the OK of any one of them; with a single row in `## Our team`,
+the student approves. If none of them is at hand, hand off with this
 step to resume at. Once approved, change `spec.md` in its own commit on this
 branch (the message names the AC and who approved), then write the test.
 
@@ -77,7 +76,11 @@ is done, what is left, the skill and step to resume at, and the student's
 name) on the Issue for a task, or on this skill's draft pull request for a
 planning skill.
 
-**Roles:** read `ROLES.md`. A single row means one student holds every role.
+**Roles:** read `ROLES.md`. A single row in `## Our team` means one student
+holds every role; skip the lineup check. Otherwise check the lineup: exactly
+one Delivery Lead, no role held by more than three people, and every role
+nobody holds has a holder under `## Side quests`. If any check fails, say
+which one and stop until `ROLES.md` is fixed.
 <!-- /gate -->
 
 ## Steps

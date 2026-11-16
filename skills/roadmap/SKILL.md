@@ -14,11 +14,13 @@ them, so anyone can pick it up in a fresh session.
 If `/usage` leaves room, suggest `/model opus`; otherwise Sonnet with
 `/effort high`.
 
-**Driver:** the Delivery Lead. Match `gh api user --jq .login` against
-`## Our team` in `ROLES.md`. No row for this login, or an empty table: fill
-in the student's row (name, GitHub username, role) first. One row in
+**Driver:** match `gh api user --jq .login` against `## Our team` in
+`ROLES.md`. No row in `## Our team` for this login, or an empty table: fill in
+the student's row (name, GitHub username, role) first. One row in
 `## Our team`: that student is the driver (they hold every role). Otherwise,
-if the row holds another role, name the driver and ask whether to continue.
+first run the lineup check under **Roles** in the gates below, and stop if it
+fails. The driver is the one Delivery Lead; if this login is not the Delivery
+Lead, name them and ask whether to continue.
 
 **Interview:** inside a step, settle changes one question at a time, each
 with your recommendation first and a one-line reason.
@@ -64,7 +66,11 @@ is done, what is left, the skill and step to resume at, and the student's
 name) on the Issue for a task, or on this skill's draft pull request for a
 planning skill.
 
-**Roles:** read `ROLES.md`. A single row means one student holds every role.
+**Roles:** read `ROLES.md`. A single row in `## Our team` means one student
+holds every role; skip the lineup check. Otherwise check the lineup: exactly
+one Delivery Lead, no role held by more than three people, and every role
+nobody holds has a holder under `## Side quests`. If any check fails, say
+which one and stop until `ROLES.md` is fixed.
 <!-- /gate -->
 
 ## Steps
@@ -112,9 +118,7 @@ planning skill.
 3. **Assign.** Draft an assignee for every task from `## Our team` in
    `ROLES.md`, role first: Phase 1 → Data Lead; data layer → Data Lead, Spec
    Lead; views → Design Lead, Pitch Lead; filters → Spec Lead, Delivery
-   Lead; polish and deploy → Delivery Lead, Design Lead. A Stakeholder Lead
-   takes the Spec Lead's and Pitch Lead's leans. Where a phase leans toward
-   two roles, alternate between them in task order. Then balance by count:
+   Lead; polish and deploy → Delivery Lead, Design Lead. Alternate in task order among everyone who holds a role the phase leans toward. A role nobody holds counts its side-quest holder as holding it. Then balance by count:
    while anyone has two or more tasks more than someone else, move the
    busiest person's latest-ordered task to the least busy person. A single
    row in `## Our team` gets every task. Assignment needs every teammate's

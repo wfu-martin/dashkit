@@ -38,9 +38,8 @@ because the spec is wrong goes spec first.
 
 When building shows that `spec.md` is wrong or silent, stop and hold a gate
 for the spec change: show what `spec.md` says, what the build needs, and
-your recommended wording. Name the Spec Lead (or Stakeholder Lead) from
-`ROLES.md` and get their OK; with a single row in `## Our team`, the student
-approves. If the approver is not at hand, hand off with this step to resume
+your recommended wording. Name every Spec Lead (or the Spec Lead side-quest holder) from `ROLES.md` and get the OK of any one of them; with a single row in `## Our team`, the student
+approves. If none of them is at hand, hand off with this step to resume
 at. Once approved, change `spec.md` first, in its own commit on this branch
 (the message names the AC and who approved), then the tests (as a locked
 test change), then the code. The pull request body calls out the change.
@@ -113,7 +112,11 @@ is done, what is left, the skill and step to resume at, and the student's
 name) on the Issue for a task, or on this skill's draft pull request for a
 planning skill.
 
-**Roles:** read `ROLES.md`. A single row means one student holds every role.
+**Roles:** read `ROLES.md`. A single row in `## Our team` means one student
+holds every role; skip the lineup check. Otherwise check the lineup: exactly
+one Delivery Lead, no role held by more than three people, and every role
+nobody holds has a holder under `## Side quests`. If any check fails, say
+which one and stop until `ROLES.md` is fixed.
 <!-- /gate -->
 
 ## Steps
@@ -202,6 +205,5 @@ planning skill.
 **Done when** the pull request is merged with the full suite green, every
 review finding has a recorded decision, and the Issue is closed with its
 handoff. After `/clear`, the student starts their next Issue with
-`/dashkit:tests-first`. When no open Issues remain, the Pitch Lead (or the
-Stakeholder Lead; with one row in `## Our team`, the student) runs
+`/dashkit:tests-first`. When no open Issues remain, a Pitch Lead (or the Pitch Lead side-quest holder; with one row in `## Our team`, the student) runs
 `/dashkit:review-dashboard`.

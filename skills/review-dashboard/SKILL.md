@@ -15,12 +15,14 @@ an Issue for `/dashkit:tests-first` and `/dashkit:build-next`.
 If `/usage` leaves room, suggest `/model opus`; otherwise Sonnet with
 `/effort high`.
 
-**Driver:** the Pitch Lead, or the Stakeholder Lead on a team of four. Match
-`gh api user --jq .login` against `## Our team` in `ROLES.md`. No row for
-this login, or an empty table: fill in the student's row (name, GitHub
-username, role) first. One row in `## Our team`: that student is the driver
-(they hold every role). Otherwise, if the row holds another role, name the
-driver and ask whether to continue.
+**Driver:** match `gh api user --jq .login` against `## Our team` in
+`ROLES.md`. No row in `## Our team` for this login, or an empty table: fill in
+the student's row (name, GitHub username, role) first. One row in
+`## Our team`: that student is the driver (they hold every role). Otherwise,
+first run the lineup check under **Roles** in the gates below, and stop if it
+fails. The drivers are everyone whose role is Pitch Lead, or, if nobody holds
+it, the Pitch Lead holder under `## Side quests`; if this login is not one of
+them, name them and ask whether to continue.
 
 **Findings:** each one in plain words: what the stakeholder would struggle
 with, and the change that fixes it. Number them in one list, most important
@@ -72,7 +74,11 @@ is done, what is left, the skill and step to resume at, and the student's
 name) on the Issue for a task, or on this skill's draft pull request for a
 planning skill.
 
-**Roles:** read `ROLES.md`. A single row means one student holds every role.
+**Roles:** read `ROLES.md`. A single row in `## Our team` means one student
+holds every role; skip the lineup check. Otherwise check the lineup: exactly
+one Delivery Lead, no role held by more than three people, and every role
+nobody holds has a holder under `## Side quests`. If any check fails, say
+which one and stop until `ROLES.md` is fixed.
 <!-- /gate -->
 
 ## Steps
@@ -104,10 +110,8 @@ planning skill.
 
    A finding the spec does not ask for is a new requirement and goes spec
    first: show your recommended wording for a new AC at the next unused
-   number, `- **AC-n** (question q): Given …, when …, then ….`, and get the
-   Spec Lead's (or Stakeholder Lead's) OK, named from `ROLES.md`; with a
-   single row in `## Our team`, the student approves. If the approver is
-   not at hand, hand off with this step to resume at. Once approved, add it
+   number, `- **AC-n** (question q): Given …, when …, then ….`, name every Spec Lead (or the Spec Lead side-quest holder) from `ROLES.md`, and get the OK of any one of them; with a
+   single row in `## Our team`, the student approves. If none of them is at hand, hand off with this step to resume at. Once approved, add it
    under `## Acceptance criteria` in `spec.md`, in its own commit (the
    message names the AC and who approved), before its Issue exists.
 
@@ -123,9 +127,7 @@ planning skill.
    Draft an assignee for every one of these Issues from `## Our team` in
    `ROLES.md`, role first: Phase 1 → Data Lead; data layer → Data Lead, Spec
    Lead; views → Design Lead, Pitch Lead; filters → Spec Lead, Delivery
-   Lead; polish and deploy → Delivery Lead, Design Lead. A Stakeholder Lead
-   takes the Spec Lead's and Pitch Lead's leans. Where a phase leans toward
-   two roles, alternate between them in Issue order. Then balance by count:
+   Lead; polish and deploy → Delivery Lead, Design Lead. Alternate in Issue order among everyone who holds a role the phase leans toward. A role nobody holds counts its side-quest holder as holding it. Then balance by count:
    while anyone has two or more of these Issues more than someone else, move
    the busiest person's latest-ordered Issue to the least busy person. A
    single row in `## Our team` gets every Issue. Assignment needs every

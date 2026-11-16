@@ -22,5 +22,9 @@ is done, what is left, the skill and step to resume at, and the student's
 name) on the Issue for a task, or on this skill's draft pull request for a
 planning skill.
 
-**Roles:** read `ROLES.md`. A single row means one student holds every role.
+**Roles:** read `ROLES.md`. A single row in `## Our team` means one student
+holds every role; skip the lineup check. Otherwise check the lineup: exactly
+one Delivery Lead, no role held by more than three people, and every role
+nobody holds has a holder under `## Side quests`. If any check fails, say
+which one and stop until `ROLES.md` is fixed.
 <!-- /gate -->

@@ -18,12 +18,14 @@ Brief: $ARGUMENTS (if empty, ask for the file or the pasted text).
 This is thinking work. If `/usage` leaves room, suggest `/model opus`;
 otherwise Sonnet with `/effort high`.
 
-**Driver:** the Spec Lead, or the Stakeholder Lead on a team of four. Match
-`gh api user --jq .login` against `## Our team` in `ROLES.md`. No row for
-this login, or an empty table: fill in the student's row (name, GitHub
-username, role) first. One row in `## Our team`: that student is the driver
-(they hold every role). Otherwise, if the row holds another role, name the
-driver and ask whether to continue.
+**Driver:** match `gh api user --jq .login` against `## Our team` in
+`ROLES.md`. No row in `## Our team` for this login, or an empty table: fill in
+the student's row (name, GitHub username, role) first. One row in
+`## Our team`: that student is the driver (they hold every role). Otherwise,
+first run the lineup check under **Roles** in the gates below, and stop if it
+fails. The drivers are everyone whose role is Spec Lead, or, if nobody holds
+it, the Spec Lead holder under `## Side quests`; if this login is not one of
+them, name them and ask whether to continue.
 
 **Interview:** inside a step, ask one question at a time, each with your
 recommended answer first and a one-line reason, and wait for the answer
@@ -73,7 +75,11 @@ is done, what is left, the skill and step to resume at, and the student's
 name) on the Issue for a task, or on this skill's draft pull request for a
 planning skill.
 
-**Roles:** read `ROLES.md`. A single row means one student holds every role.
+**Roles:** read `ROLES.md`. A single row in `## Our team` means one student
+holds every role; skip the lineup check. Otherwise check the lineup: exactly
+one Delivery Lead, no role held by more than three people, and every role
+nobody holds has a holder under `## Side quests`. If any check fails, say
+which one and stop until `ROLES.md` is fixed.
 <!-- /gate -->
 
 ## Steps
@@ -129,4 +135,4 @@ planning skill.
 
 **Done when** `spec.md` is merged to `main` and every framed question in it
 has a complete metric definition and at least one numbered AC. Tell the
-student to `/clear`; the Design Lead runs `/dashkit:design` next.
+student to `/clear`; a Design Lead (or the Design Lead side-quest holder) runs `/dashkit:design` next.

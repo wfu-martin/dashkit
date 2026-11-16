@@ -14,8 +14,9 @@ status line) and recommends handing off at 50%, says in a sentence or two
 what the next step is for, and waits for your go-ahead. Work is saved in the
 repository and on GitHub, never only in the chat, so a teammate or a fresh
 session can pick it up from the last handoff comment. Every team member
-holds a role from `ROLES.md`; the role that owns a planning skill runs it and
-merges it, and each task is run and merged by the teammate it is assigned
+holds a role from `ROLES.md`: one Delivery Lead, up to three of any other role,
+and a named side quest for any role nobody holds. Whoever holds the role that
+owns a planning skill (or its side quest) runs it and merges it, and each task is run and merged by the teammate it is assigned
 to. On a solo practice repository, one student holds every role.
 
 ---
