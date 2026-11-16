@@ -91,7 +91,10 @@ which one and stop until `ROLES.md` is fixed.
    working tree on `main`, up to date with `origin/main`.
 2. **Pick the Issue.** `$ARGUMENTS` if given; otherwise the lowest-numbered
    open Issue assigned to the student (`gh issue list --assignee @me --state open`)
-   whose **Depends on** Issues are all closed. Read it with
+   whose **Depends on** Issues are all closed. Skip the Make it yours Issue
+   (labeled `phase-6`, titled "Make it yours"): it is not built with this
+   skill. If it is the Issue given, or the only one left, say that a Design
+   Lead runs `/dashkit:make-it-yours` once Phase 5 is done, and stop. Read it with
    `gh issue view <number>` and confirm it with the student. Done when the
    student has confirmed the Issue and `gh issue view` shows every Issue it
    depends on as closed.

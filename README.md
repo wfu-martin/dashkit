@@ -1,14 +1,18 @@
 # dashkit
 
-Six Claude Code skills for building a dashboard the way a disciplined team
-does: a spec that turns a stakeholder's questions into testable
+Seven Claude Code skills for building a dashboard the way a disciplined
+team does: a spec that turns a stakeholder's questions into testable
 requirements, a design signed off on a mockup, a roadmap of small tasks,
-tests before code, one task at a time with a separate review, and a final
-review of the dashboard itself.
+tests before code, one task at a time with a separate review, an open
+session to make the finished dashboard the team's own, and a final review
+of the dashboard itself.
 
-Each skill is a short list of numbered steps, with a gate between steps.
-At each gate Claude shows two progress lines (where the whole project
-stands, and where you are in the current skill), asks you to read the
+Six of the skills are a short list of numbered steps, with a gate between
+steps. The seventh, `/dashkit:make-it-yours`, is deliberately open: no
+steps and no gates, just ideas, quick tries, and building what the team
+chooses, with every test passing before anything merges. In the stepped
+skills, at each gate Claude shows two progress lines (where the whole
+project stands, and where you are in the current skill), asks you to read the
 context percentage off your status line (or run `/context` if you have no
 status line) and recommends handing off at 50%, says in a sentence or two
 what the next step is for, and waits for your go-ahead. Work is saved in the
@@ -50,9 +54,11 @@ older repository without `tools/progress.py`, the skills copy it in from
 | `/dashkit:roadmap` | Turns `spec.md` and `design.md` into `ROADMAP.md` phases and one GitHub Issue per task, each assigned to a teammate |
 | `/dashkit:tests-first <issue>` | First half of a task: branches, writes the failing tests for one Issue, explains what each proves, and hands off with the tests red |
 | `/dashkit:build-next` | Second half of a task, from red to merged: builds one test at a time, tidies, runs the full suite, opens the pull request, has it reviewed separately, settles each finding with you, fixes the ones you choose to fix, and merges |
+| `/dashkit:make-it-yours` | Once the dashboard is finished to spec, an open session led by the Design Lead to give it its own identity and a signature feature, built and merged with every test passing |
 | `/dashkit:review-dashboard` | Checks every spec question is answered on screen and every rule in `design.md` holds, then turns the fixes you choose into assigned Issues |
 
-Each task takes two commands, each in a fresh session: `/dashkit:tests-first`
+Each task except Make it yours (which runs as `/dashkit:make-it-yours`)
+takes two commands, each in a fresh session: `/dashkit:tests-first`
 and then `/dashkit:build-next`.
 
 There is no deploy command. The roadmap plans two deploy tasks, an early
@@ -73,5 +79,7 @@ for its link; after that, every merge to `main` redeploys it.
 `python scripts/check_skills.py` checks that every skill carries the gate
 block from `scripts/gate.md` word for word, that each skill's step names
 match the tracker in `dashboard-starter` (cloned next to this repository),
-and that every skill stays user-invoked. It prints `ok` when they agree. Run
+and that every skill stays user-invoked. `make-it-yours` is the one open
+skill: it must have no gate block and no `## Steps` list. It prints `ok`
+when they agree. Run
 it before every push.

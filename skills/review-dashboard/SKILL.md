@@ -34,19 +34,27 @@ the review up.
 
 Gate commands in this skill use `--skill review-dashboard`.
 
-1. Resume check: after `git fetch`, look for a `review` branch, local or
+1. Make it yours comes first. Only when there is no `review` branch, local
+   or remote (a first review, not a resumed one), and `ROADMAP.md` has a
+   `6. Make it yours` row: if the Make it yours Issue (labeled `phase-6`,
+   titled "Make it yours") is open, or `## Make it yours` in `design.md` on
+   `main` still holds the template's placeholder ("<What your team made its
+   own…"), say the team makes the dashboard its own before the final
+   review: a Design Lead runs `/dashkit:make-it-yours`. Then stop. A
+   repository with no such row goes straight on.
+2. Resume check: after `git fetch`, look for a `review` branch, local or
    remote. If it exists, switch to it. If it has an open pull request
    (`gh pr list --head review --state open`), read its findings and the
    latest handoff comment and offer to resume at the step it names; with
    no pull request or no comment, propose the step the files show you
    reached. Resuming after Screens: ask for the screenshots again first.
-2. With no `review` branch, create it from an up-to-date `main`, then
+3. With no `review` branch, create it from an up-to-date `main`, then
    `git commit --allow-empty -m "Start the dashboard review"`, push, and
    open a draft pull request (`gh pr create --draft`) whose body holds an
    empty `## Findings` list. The handoffs go on it.
-3. Read `spec.md`, `design.md`, `ROADMAP.md`, `ROLES.md`,
+4. Read `spec.md`, `design.md`, `ROADMAP.md`, `ROLES.md`,
    `streamlit_app.py`, and `dashboard/metrics.py`.
-4. End every step that changed a file with a commit and a push.
+5. End every step that changed a file with a commit and a push.
 
 Then hold the gate for the step you start at.
 
@@ -94,8 +102,12 @@ which one and stop until `ROLES.md` is fixed.
    finding. Done when every framed question has a line, shown to the
    student, naming the section that answers it or the finding it became.
 3. **Design.** Compare every screen with its drawing in `design.md`, and
-   check every style rule there against every headline, tile, and chart.
-   Quote the rule each finding breaks. Done when every screen has been
+   check every style rule there against every headline, tile, and chart:
+   `design.md` as the team left it, including any changes from Make it
+   yours. Quote the rule each finding breaks. Also flag anything that
+   misleads (a cut-off axis, a pie, decoration on a chart, color carrying
+   a meaning alone) even where `design.md` allows it; the team decides
+   whether to fix it. Done when every screen has been
    compared with its drawing, every style rule has been checked, and each
    break is a finding that quotes its rule.
 4. **Usability.** With the student at the controls: every filter starts on a
@@ -122,7 +134,7 @@ which one and stop until `ROLES.md` is fixed.
    view), and **Depends on** (any Issues it needs, plus the line "Start
    this Issue after review pull request #<n> merges.", since its new ACs
    reach `main` only then). Label it with the phase it belongs to
-   (`phase-1` … `phase-5`; `gh label create` any that `gh label list` lacks).
+   (`phase-1` … `phase-6`; `gh label create` any that `gh label list` lacks).
 
    Draft an assignee for every one of these Issues from `## Our team` in
    `ROLES.md`, role first: Phase 1 → Data Lead; data layer → Data Lead, Spec

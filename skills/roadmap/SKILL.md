@@ -75,9 +75,9 @@ which one and stop until `ROLES.md` is fixed.
 
 ## Steps
 
-1. **Phases.** Use the five phases in `ROADMAP.md`, in critical-path order;
+1. **Phases.** Use the six phases in `ROADMAP.md`, in critical-path order;
    each depends on the one before it, and each matches a label `phase-1` …
-   `phase-5`:
+   `phase-6`:
    1. Data connection: the app reads the team's database locally and on
       Streamlit Community Cloud (deploy a hello-world early).
    2. Data layer: a tested function in `dashboard/metrics.py` for every
@@ -87,6 +87,9 @@ which one and stop until `ROLES.md` is fixed.
    4. Filters: the interactions the spec lists.
    5. Polish and deploy: every style rule in `design.md` holds, `mockup.py`
       is deleted, the live link is in the README.
+   6. Make it yours: once the dashboard is finished, the team makes it its
+      own with `/dashkit:make-it-yours`, an open session led by a Design
+      Lead; every test still passes.
 
    Show the student what each phase covers for this spec (which metrics,
    which screens, which filters). Done when the student agrees with what
@@ -109,16 +112,27 @@ which one and stop until `ROLES.md` is fixed.
    ("the README's live link opens the app"), and under **Tests that prove
    it**: "Tests: none new; the full suite stays green."
 
+   Phase 6 always has exactly one task, **Make it yours**, whatever the
+   spec says. It depends on every Phase 5 task. Its **Goal**: the team makes
+   the finished dashboard unmistakably its own. Its body says to run
+   `/dashkit:make-it-yours` once Phase 5 is done and that the whole team is
+   welcome in the session. Its task criteria, in place of AC IDs:
+   "`## Make it yours` in `design.md` on `main` says what the team made its
+   own" and "the full suite passes". Under **Tests that prove it**: "any new
+   number on screen gets a reconciliation test; the full suite stays green."
+
    Show the tasks as one table (phase · task · AC IDs · tests · depends on)
    and settle changes one question at a time. Write the agreed table under a
    `## Task draft` heading at the end of `ROADMAP.md`. Done when every AC ID
    in `spec.md` belongs to at least one task, every task with a figure names
-   its tests, and every task without one lists its task criteria and
-   "Tests: none new".
+   its tests, every task without one lists its task criteria and
+   "Tests: none new", and Phase 6 holds the one Make it yours task.
 3. **Assign.** Draft an assignee for every task from `## Our team` in
    `ROLES.md`, role first: Phase 1 → Data Lead; data layer → Data Lead, Spec
    Lead; views → Design Lead, Pitch Lead; filters → Spec Lead, Delivery
-   Lead; polish and deploy → Delivery Lead, Design Lead. Alternate in task order among everyone who holds a role the phase leans toward. A role nobody holds counts its side-quest holder as holding it. Then balance by count:
+   Lead; polish and deploy → Delivery Lead, Design Lead; Make it yours → a
+   Design Lead (the Design Lead side-quest holder if nobody holds the role),
+   left out of the count balancing below. Alternate in task order among everyone who holds a role the phase leans toward. A role nobody holds counts its side-quest holder as holding it. Then balance by count:
    while anyone has two or more tasks more than someone else, move the
    busiest person's latest-ordered task to the least busy person. A single
    row in `## Our team` gets every task. Assignment needs every teammate's
@@ -127,9 +141,9 @@ which one and stop until `ROLES.md` is fixed.
    Add an assignee column to the task draft, show it with each person's
    count, and ask the Delivery Lead to approve it. Done when the Delivery
    Lead has approved the table, no one has two or more tasks more than
-   anyone else, and every assignee appears in
+   anyone else (not counting Make it yours), and every assignee appears in
    `gh api repos/{owner}/{repo}/collaborators --jq '.[].login'`.
-4. **Issues.** Create the labels `phase-1` … `phase-5` that `gh label list`
+4. **Issues.** Create the labels `phase-1` … `phase-6` that `gh label list`
    does not show (`gh label create phase-<n>`). Then create one Issue per
    task in dependency order, so earlier numbers can be cited under
    **Depends on**:
@@ -157,3 +171,5 @@ belongs to at least one Issue, every Issue with a figure names its tests
 (one without names its task criteria), and every Issue has its assignee and
 its phase label. Tell the student to `/clear`; each assignee starts their
 first Issue with `/dashkit:tests-first <issue number>`, in dependency order.
+The Make it yours Issue is the exception: it waits for
+`/dashkit:make-it-yours` once Phase 5 is done.

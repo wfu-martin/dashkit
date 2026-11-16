@@ -121,5 +121,7 @@ which one and stop until `ROLES.md` is fixed.
 
 **Done when** the design is merged to `main`, every framed question in
 `spec.md` has a drawn section with a chosen chart, `mockup.py` matches the
-drawings, `pytest` passes, and the student has signed off. Tell the student
-to `/clear`; the Delivery Lead runs `/dashkit:roadmap` next.
+drawings, `pytest` passes, and the student has signed off. The mockup is
+in the house style; once the dashboard is finished, the team makes the look
+its own in Make it yours (`/dashkit:make-it-yours`). Tell the student to
+`/clear`; the Delivery Lead runs `/dashkit:roadmap` next.

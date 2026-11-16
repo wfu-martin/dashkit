@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check that the six dashkit skills stay in step with each other and the tracker.
+"""Check that the seven dashkit skills stay in step with each other and the tracker.
 
 Why this exists: every skill carries the same "Gates" block (scripts/gate.md,
 copied byte for byte), and every skill lists its steps as a numbered list under
@@ -15,6 +15,11 @@ It checks, for every skills/*/SKILL.md:
       equal STEPS[<skill directory name>] from the tracker, in order;
   (c) the frontmatter contains "disable-model-invocation: true".
 
+One skill is open by design: make-it-yours is a freeform session with no
+steps and no gates, so it is listed in OPEN_SKILLS. For an open skill, (a)
+and (b) are reversed: it must not carry the gate block and must not have a
+"## Steps" heading. (c) still applies.
+
 The tracker is loaded by file path from the sibling clone
 (../dashboard-starter/tools/progress.py) so no install step is needed.
 
@@ -29,6 +34,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 GATE = ROOT / "scripts" / "gate.md"
 PROGRESS = ROOT.parent / "dashboard-starter" / "tools" / "progress.py"
+OPEN_SKILLS = {"make-it-yours"}
 STEP_RE = re.compile(r"^\d+\. \*\*(.+?)\.\*\*")
 
 
@@ -71,9 +77,16 @@ def main() -> int:
         name = d.name
         text = (d / "SKILL.md").read_text(encoding="utf-8")
         front, body = split_frontmatter(text)
-        if gate not in text:
+        if name in OPEN_SKILLS:
+            if gate in text:
+                problems.append(f"{name}: open skill must not carry the gate block")
+            if re.search(r"^## Steps[ \t]*$", body, re.M):
+                problems.append(f"{name}: open skill must not have a ## Steps list")
+        elif gate not in text:
             problems.append(f"{name}: gate block missing or differs from scripts/gate.md")
-        if name not in steps:
+        if name in OPEN_SKILLS:
+            pass
+        elif name not in steps:
             problems.append(f"{name}: not a skill in the tracker's STEPS")
         else:
             found = step_names(body)

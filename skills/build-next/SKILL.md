@@ -205,5 +205,12 @@ which one and stop until `ROLES.md` is fixed.
 **Done when** the pull request is merged with the full suite green, every
 review finding has a recorded decision, and the Issue is closed with its
 handoff. After `/clear`, the student starts their next Issue with
-`/dashkit:tests-first`. When no open Issues remain, a Pitch Lead (or the Pitch Lead side-quest holder; with one row in `## Our team`, the student) runs
-`/dashkit:review-dashboard`.
+`/dashkit:tests-first`. If this Issue was the last open `phase-5` Issue,
+`ROADMAP.md` has a `6. Make it yours` row, and the Make it yours Issue
+(labeled `phase-6`, titled "Make it yours") is still open, the dashboard is
+finished: a Design Lead (or the Design Lead side-quest holder; with one row
+in `## Our team`, the student) runs `/dashkit:make-it-yours` next, with the
+whole team welcome. When no open Issues remain, or Phase 5 is closed in a
+repository whose `ROADMAP.md` has no `6. Make it yours` row, a Pitch Lead
+(or the Pitch Lead side-quest holder; with one row in `## Our team`, the
+student) runs `/dashkit:review-dashboard`.
