@@ -65,7 +65,7 @@ Between steps there is a gate. At every gate, in this order:
 
 1. Run `python tools/progress.py --skill <this skill> --step <next step number>`
    (in a task, add `--issue <number>`) and show its two lines as printed.
-   No `tools/progress.py`? Copy it from `wfu-martin/dashboard-starter` with
+   No `tools/progress.py`? Copy it from `wfu-martin/dashboard-template` with
    `gh api` first.
 2. Ask the student to read the context percentage on their status line (or
    run `/context`) and type it. Under 50%: continue. At 50% or more:
@@ -93,7 +93,8 @@ which one and stop until `ROLES.md` is fixed.
 
 1. **Screens.** Ask the student to run `streamlit run streamlit_app.py` and
    paste a screenshot of each page into the terminal. A page that shows an
-   error or will not load is the first finding. Done when you hold a
+   error or will not load is the first finding. A missing cover page, or
+   one without the database's name or the full brief, is a finding. Done when you hold a
    screenshot of every screen listed under `## Screens and interactions` in
    `spec.md`, or a finding for each one that would not show.
 2. **Answers.** For every framed question in the spec: which part of the

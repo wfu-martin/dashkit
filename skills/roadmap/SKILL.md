@@ -49,7 +49,7 @@ Between steps there is a gate. At every gate, in this order:
 
 1. Run `python tools/progress.py --skill <this skill> --step <next step number>`
    (in a task, add `--issue <number>`) and show its two lines as printed.
-   No `tools/progress.py`? Copy it from `wfu-martin/dashboard-starter` with
+   No `tools/progress.py`? Copy it from `wfu-martin/dashboard-template` with
    `gh api` first.
 2. Ask the student to read the context percentage on their status line (or
    run `/context`) and type it. Under 50%: continue. At 50% or more:
@@ -118,7 +118,8 @@ which one and stop until `ROLES.md` is fixed.
    `/dashkit:make-it-yours` once Phase 5 is done and that the whole team is
    welcome in the session. Its task criteria, in place of AC IDs:
    "`## Make it yours` in `design.md` on `main` says what the team made its
-   own" and "the full suite passes". Under **Tests that prove it**: "any new
+   own", "the app opens on a cover page with the database's name and the
+   stakeholder brief, word for word", and "the full suite passes". Under **Tests that prove it**: "any new
    number on screen gets a reconciliation test; the full suite stays green."
 
    Show the tasks as one table (phase · task · AC IDs · tests · depends on)

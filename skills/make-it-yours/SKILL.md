@@ -52,7 +52,9 @@ Ask as many or as few questions as the conversation needs.
 **Come prepared.** Before your first message, read the brief in `briefs/`,
 `spec.md`, and `design.md`, and ask for screenshots of the live app, so
 everything you say is about this dashboard, this stakeholder, and this
-company.
+company. The dashboard must open on a cover page with the database's name
+and the stakeholder brief, word for word; if it has none yet, say so once,
+early, and leave how it looks to the team.
 
 **Start with them.** Open by asking what the team wants the stakeholder to
 feel or do the moment the dashboard opens, and what the Design Lead is

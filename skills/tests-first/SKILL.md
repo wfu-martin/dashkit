@@ -59,7 +59,7 @@ Between steps there is a gate. At every gate, in this order:
 
 1. Run `python tools/progress.py --skill <this skill> --step <next step number>`
    (in a task, add `--issue <number>`) and show its two lines as printed.
-   No `tools/progress.py`? Copy it from `wfu-martin/dashboard-starter` with
+   No `tools/progress.py`? Copy it from `wfu-martin/dashboard-template` with
    `gh api` first.
 2. Ask the student to read the context percentage on their status line (or
    run `/context`) and type it. Under 50%: continue. At 50% or more:
@@ -110,8 +110,21 @@ which one and stop until `ROLES.md` is fixed.
      Given / When / Then line.
 
    Name each test after the AC it proves, `test_ac<n>_…`: AC-3 gives
-   `test_ac3_revenue_reconciles_to_invoices`. Follow
-   `tests/test_example_reconciliation.py` for the pattern.
+   `test_ac3_revenue_reconciles_to_invoices`. The pattern, for a figure the
+   screen gets from `metrics.sales_by_region`:
+
+   ```python
+   from conftest import scalar
+   from dashboard.metrics import sales_by_region
+
+   def test_ac3_sales_reconcile_to_order_totals(engine):
+       on_screen = sales_by_region(engine)["sales"].sum()
+       independent = scalar(engine, "SELECT SUM(total) FROM orders")
+       assert round(float(on_screen), 2) == round(float(independent), 2)
+   ```
+
+   The screen's function adds up order lines; the check adds up a different
+   table. Same total, two roads.
 
    So the tests can import what they call, add each function the Issue
    needs as a **stub** in the file the Issue names (for example
