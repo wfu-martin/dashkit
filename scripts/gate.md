@@ -5,7 +5,7 @@ Between steps there is a gate. At every gate, in this order:
 
 1. Run `python tools/progress.py --skill <this skill> --step <next step number>`
    (in a task, add `--issue <number>`) and show its two lines as printed.
-   No `tools/progress.py`? Copy it from `wfu-martin/dashboard-starter` with
+   No `tools/progress.py`? Copy it from `wfu-martin/dashboard-template` with
    `gh api` first.
 2. Ask the student to read the context percentage on their status line (or
    run `/context`) and type it. Under 50%: continue. At 50% or more:

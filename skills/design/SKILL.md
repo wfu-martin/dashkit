@@ -39,7 +39,7 @@ Gate commands in this skill use `--skill design`.
    interactions) and `design.md`, whose style rules bind every choice below.
    No `design.md` or `dashboard/charts.py`? The repository predates them:
    copy `design.md`, `dashboard/charts.py`, and `.streamlit/config.toml` from
-   `wfu-martin/dashboard-starter` with `gh api`.
+   `wfu-martin/dashboard-template` with `gh api`.
 4. End every step that changed a file with a commit and a push.
 
 Then hold the gate for the step you start at.
@@ -51,7 +51,7 @@ Between steps there is a gate. At every gate, in this order:
 
 1. Run `python tools/progress.py --skill <this skill> --step <next step number>`
    (in a task, add `--issue <number>`) and show its two lines as printed.
-   No `tools/progress.py`? Copy it from `wfu-martin/dashboard-starter` with
+   No `tools/progress.py`? Copy it from `wfu-martin/dashboard-template` with
    `gh api` first.
 2. Ask the student to read the context percentage on their status line (or
    run `/context`) and type it. Under 50%: continue. At 50% or more:

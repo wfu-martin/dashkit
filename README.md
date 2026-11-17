@@ -41,9 +41,11 @@ To update by hand at any time: `/plugin` → **Installed** → **dashkit** →
 **Update now**.
 
 The skills expect a repository made from
-[`dashboard-starter`](https://github.com/wfu-martin/dashboard-starter). In an
-older repository without `tools/progress.py`, the skills copy it in from
-`dashboard-starter` the first time they need it.
+[`dashboard-template`](https://github.com/wfu-martin/dashboard-template) (a
+team project) or
+[`dashboard-starter`](https://github.com/wfu-martin/dashboard-starter) (the
+practice build). In an older repository without `tools/progress.py`, the
+skills copy it in from `dashboard-template` the first time they need it.
 
 ## The skills
 

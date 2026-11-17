@@ -95,7 +95,7 @@ Between steps there is a gate. At every gate, in this order:
 
 1. Run `python tools/progress.py --skill <this skill> --step <next step number>`
    (in a task, add `--issue <number>`) and show its two lines as printed.
-   No `tools/progress.py`? Copy it from `wfu-martin/dashboard-starter` with
+   No `tools/progress.py`? Copy it from `wfu-martin/dashboard-template` with
    `gh api` first.
 2. Ask the student to read the context percentage on their status line (or
    run `/context`) and type it. Under 50%: continue. At 50% or more:
@@ -162,8 +162,7 @@ which one and stop until `ROLES.md` is fixed.
 4. **Full suite.** Run `pytest -rs` on everything. Any failure is fixed in
    the code, with the tests locked, before the next step: nothing merges
    red. Done when `pytest -rs` reports none failed or errored and none of
-   the Issue's tests skipped (only the template's vinyl_vault example tests
-   may skip, on another database).
+   the Issue's tests skipped.
 5. **Pull request.** Push, then `gh pr create` with a body that says
    `Closes #<number>`, lists what changed on screen in business language,
    and names any spec or test change and who approved it (or says there
